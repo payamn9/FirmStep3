@@ -28,7 +28,7 @@ function ajaxfunction(){
     }
 }
 
-//Fetch Products and clear filters on page load
+//Fetch Products via Request, make list and clear filters on page load
 function fetchProductList(){
 clearfilters();
 ajaxfunction();   
@@ -38,7 +38,7 @@ req.onreadystatechange = function(){
       if( req.status === 200){
         var productslist = JSON.parse(req.responseText);
         var phoneList = '<ul class="productslist">'; //Create list
-        for(var i=0; i<productslist.length; i ++){
+        for(var i=0; i<productslist.length; i ++){ //iterate through JSON and create the product list with the data
             phoneList += '<li id="' + productslist[i].id + '">';
             phoneList += '<a href="#" class="product-photo">';
             phoneList += '<img src=' + productslist[i].image.small + ' height="130" alt=' + productslist[i].name + '>';
@@ -55,7 +55,7 @@ req.onreadystatechange = function(){
             phoneList += '</li>';                   
         }     
         phoneList += '</ul>';
-        phoneList += '<p class="no-results">No Search Results</p>'
+        phoneList += '<p class="no-results">No Search Results</p>' //add a no search result text
         document.getElementById('phoneListed').innerHTML = phoneList;
         $(".no-results").hide();//Hide no search results text.
     }
